@@ -5,12 +5,14 @@ metadata:
   namespace: myapp
   annotations:
     nginx.ingress.kubernetes.io/service-upstream: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/ssl-passthrough: "true"
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
   ingressClassName: nginx
   rules:
-  - http:
+  - host: worker1
+    http:
       paths:
       - path: /api
         pathType: Prefix
@@ -26,10 +28,3 @@ spec:
             name: frontend-service
             port: 
               number: 9443
-      - path: /grafana
-        pathType: Prefix
-        backend:
-          service:
-            name: grafana
-            port:
-              name: http

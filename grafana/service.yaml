@@ -6,11 +6,12 @@ metadata:
   labels:
     app: "grafana"
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
   - name: http
     protocol: TCP
     port: 80
     targetPort: 3000
+    nodePort: 30008
   selector:
     app: "grafana"
