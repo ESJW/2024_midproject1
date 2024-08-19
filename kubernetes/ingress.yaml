@@ -10,6 +10,8 @@ metadata:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
   ingressClassName: nginx
+  tls:
+  - secretName: ingress-tls-secret
   rules:
   - host: worker1
     http:
