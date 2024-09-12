@@ -38,7 +38,7 @@ spec:
             - name: CLIENT_SECRET
               value: "1Yt9Y3DRw9"
             - name: REDIRECT_URI
-              value: "https://192.168.121.136:30001/naverlogin/login"
+              value: "https://midteam1.lion.nyhhs.com/naverlogin/login"
             - name: JAVASCRIPT_APPKEY
               value: "4b5ecb6281d617d7a988622ad24d251b"
 --- 
