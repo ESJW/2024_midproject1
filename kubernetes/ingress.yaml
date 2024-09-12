@@ -4,29 +4,26 @@ metadata:
   name: myapp-ingress
   namespace: myapp
   annotations:
-    nginx.ingress.kubernetes.io/service-upstream: "true"
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    alb.ingress.kubernetes.io/scheme: internet-facing         # ALB의 접근 방식 설정
+    alb.ingress.kubernetes.io/target-type: ip                 # ALB가 대상으로 할 IP 주소 유형
+    alb.ingress.kubernetes.io/group.name: my-group            # ALB 그룹 설정
+    alb.ingress.kubernetes.io/load-balancer-name: alb-ingress-controller
+    alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:ap-northeast-2:727646470302:certificate/a9e264e6-a401-42c8-ad4e-9795b721cfa4"
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'  # HTTP와 HTTPS 포트 설정
+    alb.ingress.kubernetes.io/ssl-redirect: "443"             # HTTPS로 리다이렉트 설정
+    alb.ingress.kubernetes.io/healthcheck-path: "/"           # 헬스 체크 경로 설정
 spec:
-  ingressClassName: nginx
+  ingressClassName: alb
   tls:
-  - secretName: ingress-tls-secret
+  - secretName: ingress-tls-secret                            # TLS 인증서 비밀 이름
   rules:
-  - host: worker1
+  - host: midteam1.lion.nyhhs.com                             #도메인 이름- 해당 도메인으로 접속해야, SSL 인증 반영하여 정상>적으로 접근가능
     http:
       paths:
-      - path: /api
-        pathType: Prefix
-        backend:
-          service:
-            name: backend-service
-            port: 
-              number: 8000
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: frontend-service
-            port: 
-              number: 9443
+            name: frontend-service                            # 프론트엔드 서비스 이름
+            port:
+              number: 9443                                   # 프론트엔드 서비스 포트
