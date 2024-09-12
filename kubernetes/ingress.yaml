@@ -15,10 +15,6 @@ metadata:
     alb.ingress.kubernetes.io/backend-protocol: HTTPS         # 백엔드 서비스에 대한 프로토콜을 HTTPS로 설정
 spec:
   ingressClassName: alb
-  tls:
-  - hosts:
-    - midteam1.lion.nyhhs.com                                 # 도메인 이름 명시
-    secretName: ingress-tls-secret                            # TLS 인증서 비밀 이름
   rules:
   - host: midteam1.lion.nyhhs.com                             # 도메인 이름
     http:
@@ -28,5 +24,5 @@ spec:
         backend:
           service:
             name: frontend-service                            # 프론트엔드 서비스 이름
-            port:
+            port: 
               number: 9443                                    # 프론트엔드 서비스 포트
