@@ -34,11 +34,11 @@ spec:
             - name: CHATBOT_PORT
               value: "8000"
             - name: CLIENT_ID
-              value: "7hI4IYFb2ETaTtFDe95B"
+              value: "_6vvNxz9b7hiBBvaP7T9"
             - name: CLIENT_SECRET
-              value: "1Yt9Y3DRw9"
+              value: "j2JaqWr4EH"
             - name: REDIRECT_URI
-              value: "https://midteam1.lion.nyhhs.com/naverlogin/login"
+              value: "https://52.79.248.157:30001/naverlogin/login"
             - name: JAVASCRIPT_APPKEY
               value: "4b5ecb6281d617d7a988622ad24d251b"
 --- 

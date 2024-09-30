@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-server
+  namespace: myapp
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: esjwoo/mini-mysql_init
+        args:
+         - "--bind-address=0.0.0.0"
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "abc123"
+        - name: MYSQL_DATABASE
+          value: "mybank"
+        - name: MYSQL_USER
+          value: "student"
+        - name: MYSQL_PASSWORD
+          value: "abc123"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+  namespace: myapp
+spec:
+  type: NodePort
+  selector:
+    app: mysql
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+      nodePort: 30006
